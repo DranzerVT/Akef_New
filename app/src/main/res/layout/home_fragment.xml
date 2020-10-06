@@ -1,0 +1,524 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/scrollView"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimaryDark"
+            app:cardElevation="4dp">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@color/colorPrimary">
+
+                <TextView
+                    android:id="@+id/desc_header"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/an_op_community_just_for_gamers"
+                    android:textColor="@android:color/white"
+                    android:textSize="30sp"
+                    android:layout_margin="10dp"
+                    android:textAlignment="center"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/desc_main"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/desc_main_text"
+                    android:textColor="#C1BEBE"
+                    android:layout_marginTop="10dp"
+                    android:textSize="16sp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginStart="10dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/desc_header"
+                    android:textAlignment="center"/>
+
+                <Button
+                    android:id="@+id/esports_reg_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_marginTop="20dp"
+                    android:background="#CF1407"
+                    android:elevation="10dp"
+                    android:shadowRadius="10"
+                    android:shadowDx="5"
+                    android:shadowDy="5"
+                    android:shadowColor="#FFFFFF"
+                    android:stateListAnimator="@animator/button_state_list_anim_material"
+                    android:text="ESPORTS REGISTRATION"
+                    android:textColor="@android:color/white"
+                    android:padding="10dp"
+                    app:layout_constraintTop_toBottomOf="@+id/desc_main" />
+
+                <com.flaviofaria.kenburnsview.KenBurnsView
+                    android:id="@+id/kenBurnsView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="270dp"
+                    android:layout_marginTop="30dp"
+                    android:src="@drawable/cod_bg"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/esports_reg_btn" />
+
+                <TextView
+                    android:id="@+id/codm_header"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/codm_header"
+                    android:textColor="@android:color/white"
+                    android:textSize="22sp"
+                    android:textStyle="bold"
+                    android:layout_marginTop="10dp"
+                    android:textAlignment="center"
+                    app:layout_constraintVertical_bias="0"
+                    app:layout_constraintBottom_toBottomOf="@+id/kenBurnsView"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/kenBurnsView"
+                    app:layout_constraintTop_toTopOf="@+id/kenBurnsView" />
+
+                <ImageView
+                    android:id="@+id/cod_logo"
+                    android:layout_width="120dp"
+                    android:layout_height="120dp"
+                    android:src="@drawable/codmko_logo"
+                    android:layout_marginTop="10dp"
+                    app:layout_constraintHorizontal_bias="1"
+                    app:layout_constraintEnd_toEndOf="@+id/kenBurnsView"
+                    app:layout_constraintStart_toStartOf="@id/kenBurnsView"
+                    app:layout_constraintTop_toBottomOf="@+id/codm_header" />
+
+                <TextView
+                    android:id="@+id/codm_desc"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="25dp"
+                    android:text="@string/codm_desc"
+                    android:textAlignment="center"
+                    android:textColor="#FFFFFF"
+                    android:textSize="16sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/cod_logo"
+                    app:layout_constraintEnd_toStartOf="@id/cod_logo"
+                    app:layout_constraintStart_toStartOf="@+id/kenBurnsView"
+                    app:layout_constraintTop_toBottomOf="@+id/codm_header" />
+
+
+                <Button
+                    android:id="@+id/know_more_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="#CF1407"
+                    android:elevation="10dp"
+                    android:padding="10dp"
+                    android:shadowColor="#FFFFFF"
+                    android:shadowDx="5"
+                    android:shadowDy="5"
+                    android:shadowRadius="10"
+                    android:stateListAnimator="@animator/button_state_list_anim_material"
+                    android:text="Know More"
+                    android:textColor="@android:color/white"
+                    app:layout_constraintBottom_toBottomOf="@+id/kenBurnsView"
+                    app:layout_constraintEnd_toEndOf="@+id/kenBurnsView"
+                    app:layout_constraintStart_toStartOf="@+id/kenBurnsView"
+                    app:layout_constraintTop_toBottomOf="@+id/cod_logo"
+                    app:layout_constraintVertical_bias="0.5" />
+
+
+                <TextView
+                    android:id="@+id/trend_games_header"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/trending_games"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:textColor="@android:color/white"
+                    android:textSize="26sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/kenBurnsView" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/trend_games_list"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/trend_games_header"/>
+
+                <com.flaviofaria.kenburnsview.KenBurnsView
+                    android:id="@+id/akpga_burnsview"
+                    android:layout_width="wrap_content"
+                    android:layout_height="300dp"
+                    android:layout_marginTop="30dp"
+                    android:src="@drawable/gamecenter"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/trend_games_list" />
+
+                <TextView
+                    android:id="@+id/akpga_header"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/what_akpga_have"
+                    android:textColor="@android:color/white"
+                    android:textSize="24sp"
+                    android:textStyle="bold"
+                    android:layout_marginTop="10dp"
+                    android:textAlignment="center"
+                    app:layout_constraintVertical_bias="0"
+                    app:layout_constraintBottom_toBottomOf="@+id/akpga_burnsview"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/akpga_burnsview"
+                    app:layout_constraintTop_toTopOf="@+id/akpga_burnsview" />
+
+                <TextView
+                    android:id="@+id/akpga_stats"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/stats_header"
+                    android:textColor="#DCDCDC"
+                    android:textAlignment="center"
+                    android:textSize="16sp"
+                    android:layout_marginTop="10dp"
+                    app:layout_constraintEnd_toEndOf="@+id/akpga_header"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/akpga_header" />
+
+
+                <TextView
+                    android:id="@+id/member_count"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:text="27691"
+                    android:textAlignment="center"
+                    android:textColor="@android:color/white"
+                    android:textSize="38sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="@id/guideline"
+                    app:layout_constraintTop_toBottomOf="@id/akpga_stats" />
+
+                <TextView
+                    android:id="@+id/member_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/members"
+                    android:textAlignment="center"
+                    android:textColor="@android:color/white"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="@+id/member_count"
+                    app:layout_constraintStart_toStartOf="@+id/member_count"
+                    app:layout_constraintTop_toBottomOf="@id/member_count" />
+
+                <TextView
+                    android:id="@+id/clan_count"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:text="344"
+                    android:textAlignment="center"
+                    android:textColor="@android:color/white"
+                    android:textSize="38sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="@id/guideline"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/akpga_stats" />
+
+                <TextView
+                    android:id="@+id/clan_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="REGISTERED CLANS"
+                    android:textAlignment="center"
+                    android:textColor="@android:color/white"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="@+id/clan_count"
+                    app:layout_constraintStart_toStartOf="@+id/clan_count"
+                    app:layout_constraintTop_toBottomOf="@id/clan_count" />
+
+                <TextView
+                    android:id="@+id/tourney_count"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:text="164"
+                    android:textAlignment="center"
+                    android:textColor="@android:color/white"
+                    android:textSize="38sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="@id/guideline"
+                    app:layout_constraintTop_toBottomOf="@id/member_label" />
+
+                <TextView
+                    android:id="@+id/tourney_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/tournaments_hosted"
+                    android:textAlignment="center"
+                    android:textColor="@android:color/white"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="@+id/tourney_count"
+                    app:layout_constraintStart_toStartOf="@+id/tourney_count"
+                    app:layout_constraintTop_toBottomOf="@id/tourney_count" />
+
+
+                <TextView
+                    android:id="@+id/room_count"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:text="24"
+                    android:textAlignment="center"
+                    android:textColor="@android:color/white"
+                    android:textSize="38sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="@id/guideline"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/clan_label" />
+
+                <TextView
+                    android:id="@+id/room_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/daily_room_matches"
+                    android:textAlignment="center"
+                    android:textColor="@android:color/white"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="@+id/room_count"
+                    app:layout_constraintStart_toStartOf="@+id/room_count"
+                    app:layout_constraintTop_toBottomOf="@id/room_count" />
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/guideline"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_percent="0.5" />
+
+                <TextView
+                    android:id="@+id/contact_header"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:textSize="26sp"
+                    android:textColor="@android:color/white"
+                    android:textStyle="bold"
+                    android:textAlignment="center"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_marginTop="20dp"
+                    app:layout_constraintTop_toBottomOf="@id/akpga_burnsview"
+                    android:text="@string/got_a_question"/>
+                
+                <LinearLayout
+                    android:id="@+id/contact_layout"
+                    android:orientation="vertical"
+                    android:layout_width="0dp"
+                    android:layout_margin="10dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/gray_border"
+                    app:layout_constraintTop_toBottomOf="@id/contact_header"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent">
+
+                    <TextView
+                        android:id="@+id/name_label"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/your_name_required"
+                        android:textColor="@color/gray_text"
+                        android:textAlignment="center"
+                        android:layout_marginTop="10dp"/>
+
+                    <EditText
+                        android:id="@+id/name_edt"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:background="@drawable/edittext_bg_selector"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginTop="10dp"/>
+
+                    <TextView
+                        android:id="@+id/mail_label"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/your_email_required"
+                        android:textColor="@color/gray_text"
+                        android:textAlignment="center"
+                        android:layout_marginTop="10dp"/>
+
+                    <EditText
+                        android:id="@+id/mail_edt"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:inputType="textEmailAddress"
+                        android:background="@drawable/edittext_bg_selector"
+                        android:layout_marginTop="10dp"/>
+
+                    <TextView
+                        android:id="@+id/phone_label"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/your_phone_number_required"
+                        android:textColor="@color/gray_text"
+                        android:textAlignment="center"
+                        android:layout_marginTop="10dp"/>
+
+                    <EditText
+                        android:id="@+id/phone_edt"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:inputType="phone"
+                        android:background="@drawable/edittext_bg_selector"
+                        android:layout_marginTop="10dp"/>
+
+                    <TextView
+                        android:id="@+id/subject_label"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/subject_required"
+                        android:textColor="@color/gray_text"
+                        android:textAlignment="center"
+                        android:layout_marginTop="10dp"/>
+
+                    <EditText
+                        android:id="@+id/subject_edt"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:background="@drawable/edittext_bg_selector"
+                        android:layout_marginTop="10dp"/>
+
+                    <TextView
+                        android:id="@+id/message_label"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/your_message_required"
+                        android:textColor="@color/gray_text"
+                        android:textAlignment="center"
+                        android:layout_marginTop="10dp"/>
+
+                    <EditText
+                        android:id="@+id/message_edt"
+                        android:layout_width="match_parent"
+                        android:layout_height="100dp"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:gravity="top|left"
+                        android:inputType="textMultiLine"
+                        android:overScrollMode="always"
+                        android:scrollbarStyle="insideInset"
+                        android:scrollbars="vertical"
+                        android:singleLine="false"
+                        android:scrollHorizontally="false"
+                        android:layout_marginBottom="20dp"
+                        android:background="@drawable/edittext_bg_selector"
+                        android:layout_marginTop="10dp"/>
+
+                    <Button
+                        android:id="@+id/send_btn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="#CF1407"
+                        android:elevation="10dp"
+                        android:padding="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:shadowColor="#FFFFFF"
+                        android:shadowDx="5"
+                        android:shadowDy="5"
+                        android:shadowRadius="10"
+                        android:layout_gravity="center"
+                        android:stateListAnimator="@animator/button_state_list_anim_material"
+                        android:text="SEND"
+                        android:textColor="@android:color/white" />
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/contact_desc"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/contact_desc"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginTop="20dp"
+                    android:textColor="@color/gray_text"
+                    android:textSize="16sp"
+                    android:textAlignment="center"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginStart="10dp"
+                    app:layout_constraintTop_toBottomOf="@id/contact_layout" />
+
+                <TextView
+                    android:id="@+id/portfolio_share"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/share_portfolio"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginTop="10dp"
+                    android:textColor="@color/gray_text"
+                    android:textSize="16sp"
+                    android:textAlignment="center"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginStart="10dp"
+                    app:layout_constraintTop_toBottomOf="@id/contact_desc" />
+
+                <Button
+                    android:id="@+id/btn_admin_panel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_marginTop="20dp"
+                    android:background="#CF1407"
+                    android:elevation="10dp"
+                    android:shadowRadius="10"
+                    android:shadowDx="5"
+                    android:shadowDy="5"
+                    android:shadowColor="#FFFFFF"
+                    android:stateListAnimator="@animator/button_state_list_anim_material"
+                    android:text="AKEF ADMIN PANEL"
+                    android:textColor="@android:color/white"
+                    android:padding="10dp"
+                    app:layout_constraintTop_toBottomOf="@+id/portfolio_share"
+                    android:layout_marginBottom="20dp"
+                    app:layout_constraintBottom_toBottomOf="parent"/>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+            
+        </androidx.cardview.widget.CardView>
+    </LinearLayout>
+
+</androidx.core.widget.NestedScrollView>

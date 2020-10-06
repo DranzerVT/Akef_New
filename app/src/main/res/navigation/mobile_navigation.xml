@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/nav_tournament">
+
+    <fragment
+        android:id="@+id/nav_home"
+        android:name="com.android.akef.UI.home.HomeFragment"
+        android:label="@string/app_name"
+        tools:layout="@layout/home_fragment" />
+
+    <fragment
+        android:id="@+id/nav_tournament"
+        android:name="com.android.akef.UI.tournaments.TournamentsFragment"
+        android:label="@string/tournaments"
+        tools:layout="@layout/tournaments_fragment" />
+
+    <fragment
+        android:id="@+id/nav_latest_updates"
+        android:name="com.android.akef.UI.latestupdates.LatestUpdatesFragment"
+        android:label="@string/latestupdates"
+        tools:layout="@layout/latest_updates_fragment" />
+
+
+    <fragment android:id="@+id/nav_streamers_connect"
+        android:name="com.android.akef.UI.streamersconnect.StreamersConnectFragment"
+        android:label="@string/streamersconnect"
+        tools:layout="@layout/streamers_connect_fragment" />
+</navigation>
