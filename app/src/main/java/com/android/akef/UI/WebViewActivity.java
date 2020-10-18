@@ -70,6 +70,7 @@ public class WebViewActivity extends AppCompatActivity {
             }
         });
         webView.loadUrl(weburl);
+        webView.reload();
     }
 
 }

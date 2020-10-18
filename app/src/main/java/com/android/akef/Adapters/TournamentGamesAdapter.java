@@ -1,5 +1,7 @@
 package com.android.akef.Adapters;
 
+import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,15 +13,20 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.akef.R;
 import com.android.akef.Tables.Tournament;
+import com.android.akef.UI.WebViewActivity;
+import com.android.akef.Utils.Variables;
+import com.google.android.material.card.MaterialCardView;
 
 import java.util.List;
 
 public class TournamentGamesAdapter extends RecyclerView.Adapter<TournamentGamesAdapter.ViewHolder> {
 
     List<Tournament> tournamentList;
+    Context mContext;
 
-    public TournamentGamesAdapter(List<Tournament> tournamentList) {
+    public TournamentGamesAdapter(List<Tournament> tournamentList,Context mContext) {
         this.tournamentList = tournamentList;
+        this.mContext = mContext;
     }
 
     @NonNull
@@ -41,6 +48,14 @@ public class TournamentGamesAdapter extends RecyclerView.Adapter<TournamentGames
         holder.gameName.setText(tournamentList.get(position).getTournamentGame());
         holder.platform.setText(tournamentList.get(position).getTournamentPlatform());
         holder.maxParticipants.setText(tournamentList.get(position).getTournamentMaxParticipants());
+        holder.tournamentCard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(mContext, WebViewActivity.class);
+                intent.putExtra(Variables.WEBVIEW_URL_KEY,tournamentList.get(position).getLink());
+                mContext.startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -51,6 +66,7 @@ public class TournamentGamesAdapter extends RecyclerView.Adapter<TournamentGames
     public class ViewHolder extends RecyclerView.ViewHolder {
         public ImageView logo;
         public TextView title,date,gameName,platform,maxParticipants;
+        public MaterialCardView tournamentCard;
 
 
         //This is the subclass ViewHolder which simply
@@ -65,6 +81,7 @@ public class TournamentGamesAdapter extends RecyclerView.Adapter<TournamentGames
             gameName = (TextView) itemView.findViewById(R.id.tournamentGameName);
             platform = (TextView) itemView.findViewById(R.id.tournamentConsole);
             maxParticipants = (TextView) itemView.findViewById(R.id.tournamentTeams);
+            tournamentCard = (MaterialCardView) itemView.findViewById(R.id.tournament_card);
         }
 
     }

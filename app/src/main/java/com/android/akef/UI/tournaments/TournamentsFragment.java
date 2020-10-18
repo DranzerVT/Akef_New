@@ -53,7 +53,7 @@ public class TournamentsFragment extends Fragment {
 
                         @Override
                         public void run() {
-                            TournamentGamesAdapter tournamentGamesAdapter = new TournamentGamesAdapter(tournamentList);
+                            TournamentGamesAdapter tournamentGamesAdapter = new TournamentGamesAdapter(tournamentList,getActivity());
                             tournamentListView.setAdapter(tournamentGamesAdapter);
                         }
                     });
