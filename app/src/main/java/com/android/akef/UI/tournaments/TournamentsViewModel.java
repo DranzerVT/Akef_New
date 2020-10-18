@@ -53,7 +53,7 @@ public class TournamentsViewModel extends AndroidViewModel {
                     String gameMode = responseList.get(i).getGameModes();
                     String timezone = responseList.get(i).getTournamentTimezone();
                     String startDate = responseList.get(i).getTournamentStarts();
-                    String contestants = "";
+                    String contestants = responseList.get(i).getTournamentContestants();
                     String prizes = "";
                     String tournamentGamesFormat = responseList.get(i).getTournamentGamesFormat();
                     String tournamentGameFrequency = responseList.get(i).getTournamentGameFrequency();
