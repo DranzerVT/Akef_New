@@ -4,6 +4,7 @@ import android.app.Application;
 
 import com.android.akef.Interfaces.DatabaseFetchListener;
 import com.android.akef.Tables.Tournament;
+import com.android.akef.Tables.User;
 
 import java.util.List;
 import java.util.concurrent.Executor;
@@ -33,5 +34,17 @@ public class Repository {
             appDatabase.tournamentDao().insertAll(tournamentList);
             listener.onLoadingFinished(tournamentList);
         });
+    }
+
+    public List<Tournament> loadTournamentsFromDB() {
+        return appDatabase.tournamentDao().getAllTournaments();
+    }
+
+    public User getLoggedInUser() {
+        List<User> userList = appDatabase.userDao().getAllUser();
+        if(userList == null || userList.size() < 1){
+            return null;
+        }
+        return userList.get(0);
     }
 }

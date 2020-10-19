@@ -41,6 +41,11 @@ public class TournamentsFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         mViewModel = new ViewModelProvider(this).get(TournamentsViewModel.class);
         tournamentListView = view.findViewById(R.id.recyclerView);
+        List<Tournament> tournamentList = mViewModel.fetchTournamentsFromDB();
+        if(tournamentList!= null && tournamentList.size() > 0){
+            TournamentGamesAdapter tournamentGamesAdapter = new TournamentGamesAdapter(tournamentList,getActivity());
+            tournamentListView.setAdapter(tournamentGamesAdapter);
+        }
         mViewModel.loadTournamentList(new DatabaseFetchListener() {
             @Override
             public <T> void onLoadingFinished(T o) {

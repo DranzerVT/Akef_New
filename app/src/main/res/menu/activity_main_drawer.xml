@@ -22,6 +22,11 @@
             android:id="@+id/nav_streamers_connect"
             android:icon="@drawable/ic_baseline_videocam_24"
             android:title="@string/streamersconnect" />
+
+        <item
+            android:id="@+id/nav_forum"
+            android:icon="@drawable/ic_baseline_forum_24"
+            android:title="@string/forums" />
     </group>
 
     <group android:checkableBehavior="none"
@@ -35,6 +40,12 @@
             android:id="@+id/nav_login"
             android:icon="@drawable/ic_baseline_subdirectory_arrow_right_24"
             android:title="@string/log_in" />
+
+        <item
+            android:id="@+id/nav_logout"
+            android:icon="@drawable/ic_baseline_subdirectory_arrow_left_24"
+            android:title="@string/log_out"
+            android:visible="false"/>
 
 
     </group>

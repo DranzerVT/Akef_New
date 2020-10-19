@@ -1,42 +1,66 @@
-package com.android.akef.UI;
+package com.android.akef.UI.forum;
+
+import androidx.appcompat.app.AlertDialog;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.content.DialogInterface;
 import android.os.Bundle;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.webkit.GeolocationPermissions;
 import android.webkit.WebChromeClient;
-import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-
+import com.android.akef.Interfaces.WebAppInterface;
 import com.android.akef.R;
-import com.android.akef.Utils.Variables;
+import com.android.akef.UI.WebViewActivity;
 
-public class WebViewActivity extends AppCompatActivity {
+public class ForumFragment extends Fragment {
 
+    private ForumViewModel mViewModel;
     WebView webView;
+
+    public static ForumFragment newInstance() {
+        return new ForumFragment();
+    }
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_web_view);
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        String url = getIntent().getExtras().getString(Variables.WEBVIEW_URL_KEY,"");
-        String jsKey = getIntent().getExtras().getString(Variables.WEBVIEW_JAVASCRIPT_KEY,"");
-        String title = getIntent().getExtras().getString(Variables.WEBVIEW_TITLE,"AKEF");
-        boolean requiresRefresh = getIntent().getBooleanExtra(Variables.REQUIRES_REFRESH,false);
-        getSupportActionBar().setTitle(title);
-        loadWebView(url,jsKey,requiresRefresh);
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
+                             @Nullable Bundle savedInstanceState) {
+        return inflater.inflate(R.layout.forum_fragment, container, false);
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        webView = view.findViewById(R.id.forum_view);
+        webView.addJavascriptInterface(new WebAppInterface(getActivity()), "Android");
+        String jsKey = "javascript:(function() { " +
+                "var head = document.getElementsByClassName('ubermenu-responsive-toggle ubermenu-responsive-toggle-main ubermenu-skin-grey-white ubermenu-loc-header-menu ubermenu-responsive-toggle-content-align-left ubermenu-responsive-toggle-align-full ')[0].style.display='none'; " +
+                "var head = document.getElementsByClassName('logo col-lg-4 col-md-4')[0].style.display='none'; " +
+                "var head = document.getElementById('footer').style.display='none'; " +
+                "})()";
+        String url = "https://akef.in/staging/function-test/";
+        loadWebView(url,jsKey,false);
+
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        mViewModel = new ViewModelProvider(this).get(ForumViewModel.class);
+        // TODO: Use the ViewModel
     }
 
     public void loadWebView(final String weburl,String jsKey,boolean requiresRefresh){
-        webView = findViewById(R.id.webview);
         webView.getSettings().setJavaScriptEnabled(true);
         webView.getSettings().setUseWideViewPort(true);
         webView.getSettings().setLoadWithOverviewMode(true);
@@ -47,7 +71,7 @@ public class WebViewActivity extends AppCompatActivity {
             @Override
             public void onGeolocationPermissionsShowPrompt(final String origin, final GeolocationPermissions.Callback callback) {
                 final boolean remember = false;
-                AlertDialog.Builder builder = new AlertDialog.Builder(WebViewActivity.this);
+                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
                 builder.setTitle("Locations");
                 builder.setMessage("Would like to use your Current Location ")
                         .setCancelable(true).setPositiveButton("Allow", new DialogInterface.OnClickListener() {
@@ -65,17 +89,11 @@ public class WebViewActivity extends AppCompatActivity {
                 alert.show();
             }
         });
-        // webView.loadDataWithBaseURL("",html, "text/html", "UTF-8","");
+
         webView.setWebViewClient(new WebViewClient() {
             @Override
             public void onPageFinished(WebView view, String url)
             {
-/*                webView.loadUrl("javascript:(function() { " +
-                        "var head = document.getElementsByClassName('edgtf-mobile-header')[0].style.display='none'; " +
-                        "var head = document.getElementsByClassName('ubermenu-responsive-toggle ubermenu-responsive-toggle-main ubermenu-skin-grey-white ubermenu-loc-header-menu ubermenu-responsive-toggle-content-align-left ubermenu-responsive-toggle-align-full ')[0].style.display='none'; " +
-                        "var head = document.getElementsByClassName('navbar-wrapper')[0].style.display='none'; " +
-                        "var head = document.getElementById('footer').style.display='none'; " +
-                        "})()");*/
                 Log.e("WebviewActivity", "onPageFinished: " + jsKey );
                 webView.loadUrl(jsKey);
             }
@@ -86,9 +104,5 @@ public class WebViewActivity extends AppCompatActivity {
         }
     }
 
-    @Override
-    public boolean onSupportNavigateUp() {
-        onBackPressed();
-        return true;
-    }
+
 }

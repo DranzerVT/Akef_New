@@ -28,4 +28,9 @@
         android:name="com.android.akef.UI.streamersconnect.StreamersConnectFragment"
         android:label="@string/streamersconnect"
         tools:layout="@layout/streamers_connect_fragment" />
+
+    <fragment android:id="@+id/nav_forum"
+        android:name="com.android.akef.UI.forum.ForumFragment"
+        android:label="@string/forums"
+        tools:layout="@layout/forum_fragment" />
 </navigation>

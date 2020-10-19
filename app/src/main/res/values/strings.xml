@@ -3,7 +3,7 @@
     <string name="title_activity_home">HomeActivity</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="nav_header_title">Crimsonking</string>
+    <string name="nav_header_title">Guest</string>
     <string name="nav_header_subtitle">Level : 0</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
@@ -42,4 +42,6 @@
     <string name="games">Games</string>
     <string name="home">Home</string>
     <string name="more">More</string>
+    <string name="forums">Forums</string>
+    <string name="log_out">Log Out</string>
 </resources>

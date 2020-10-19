@@ -27,7 +27,8 @@
         <activity android:name=".UI.MainActivity">
 
         </activity>
-        <activity android:name=".UI.WebViewActivity" />
+        <activity android:name=".UI.WebViewActivity"
+            android:theme="@style/WebviewTheme"/>
     </application>
 
 </manifest>

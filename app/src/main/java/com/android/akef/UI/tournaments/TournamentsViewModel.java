@@ -32,6 +32,10 @@ public class TournamentsViewModel extends AndroidViewModel {
         repository = Repository.getInstance(application);
     }
 
+    public List<Tournament> fetchTournamentsFromDB(){
+       return repository.loadTournamentsFromDB();
+    }
+
     public void loadTournamentList(DatabaseFetchListener listener){
 
         apiInterface = RetrofitClient.getClient(Variables.BASE_URL).create(ApiInterface.class);

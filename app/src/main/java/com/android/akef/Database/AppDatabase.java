@@ -7,8 +7,9 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
 import com.android.akef.Tables.Tournament;
+import com.android.akef.Tables.User;
 
-@Database(entities = {Tournament.class},
+@Database(entities = {Tournament.class, User.class},
         version = 1,
         exportSchema = false)
 public abstract class AppDatabase extends RoomDatabase {
@@ -17,6 +18,7 @@ public abstract class AppDatabase extends RoomDatabase {
     public static String DATABASE_NAME = "akef.db";
 
     public abstract TournamentDao tournamentDao();
+    public abstract UserDao userDao();
 
     public static AppDatabase getAppDatabase(Context context) {
         if (INSTANCE == null) {
@@ -26,9 +28,8 @@ public abstract class AppDatabase extends RoomDatabase {
                             // allow queries on the main thread.
                             // Don't do this on a real app! See PersistenceBasicSample for an example.
                             .fallbackToDestructiveMigration()
-                            .addMigrations() //edit_scheme2
+                            .addMigrations()
                             .allowMainThreadQueries()
-
                             .build();
 
         }

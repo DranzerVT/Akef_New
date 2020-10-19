@@ -8,13 +8,10 @@ import com.google.gson.Gson;
 public class Variables {
 
     public static final String WEBVIEW_URL_KEY = "WebViewURL";
-    public static final String JAVASCRIPT_FUNC = "\"javascript:(function() { \" +\n" +
-            "                        \"var head = document.getElementsByClassName('edgtf-mobile-header')[0].style.display='none'; \" +\n" +
-            "                        \"var head = document.getElementsByClassName('blog-sidebar')[0].style.display='none'; \" +\n" +
-            "                        \"var head = document.getElementsByClassName('footer-container')[0].style.display='none'; \" +\n" +
-            "                        \"})()\"";
-
+    public static final String WEBVIEW_JAVASCRIPT_KEY = "WebViewJS";
     public static final String BASE_URL = "https://akef.in/staging/wp-json/wp/v2/";
+    public static final String REQUIRES_REFRESH = "RequiresRefresh" ;
+    public static final String WEBVIEW_TITLE = "WebViewTitle" ;
 
 
     public static void showSendData(Object obj, String serviceName) {

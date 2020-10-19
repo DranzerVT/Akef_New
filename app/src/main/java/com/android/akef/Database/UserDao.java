@@ -5,26 +5,26 @@ import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 
-import com.android.akef.Tables.Tournament;
+import com.android.akef.Tables.User;
 
 import java.util.List;
 
 @Dao
-public interface TournamentDao {
+public interface UserDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    void insert(List<Tournament> tournamentList);
+    void insert(List<User> userList);
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    void insert(Tournament tournament);
+    void insert(User user);
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    void insertAll(List<Tournament> tournamentList);
+    void insertAll(List<User> userList);
 
-    @Query("DELETE FROM Tournament")
+    @Query("DELETE FROM User")
     void deleteAll();
 
-    @Query("SELECT * from Tournament order by TournamentID desc")
-    List<Tournament> getAllTournaments();
+    @Query("SELECT * from User")
+    List<User> getAllUser();
 
 }
