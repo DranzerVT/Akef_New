@@ -1,5 +1,6 @@
 package com.android.akef.UI;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -12,6 +13,7 @@ import com.android.akef.Database.Repository;
 import com.android.akef.R;
 import com.android.akef.Tables.User;
 import com.android.akef.Utils.CircleTransform;
+import com.android.akef.Utils.Variables;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -36,6 +38,11 @@ public class HomeActivity extends AppCompatActivity {
     Repository repository;
     boolean isLoggedIn = false;
     User currentUser;
+    DrawerLayout drawer;
+    NavigationView navigationView;
+    TextView userName;
+    TextView userLevel;
+    ImageView userImage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,21 +58,62 @@ public class HomeActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
+
+        setupNavDrawer();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
         repository = Repository.getInstance(getApplication());
         currentUser = repository.getLoggedInUser();
         if(currentUser!=null){
             isLoggedIn = true;
+        }else{
+            isLoggedIn = false;
         }
-        setupNavDrawer();
+
+        checkLoginState();
+    }
+
+    public void checkLoginState(){
+
+        if(isLoggedIn){
+            navigationView.getMenu().findItem(R.id.nav_login).setVisible(false);
+            navigationView.getMenu().findItem(R.id.nav_logout).setVisible(true);
+            userLevel.setVisibility(View.GONE);
+            userLevel.setText(currentUser.getLevel());
+            userName.setText(currentUser.getUserName());
+            Glide.with(HomeActivity.this)
+                    .load(currentUser.getProfile())
+                    .transform(new CircleTransform())
+                    .apply(new RequestOptions()
+                            .placeholder(R.drawable.progress_animation)
+                            .error(R.drawable.noimage))
+                    .into(userImage);
+
+        }else{
+            navigationView.getMenu().findItem(R.id.nav_login).setVisible(true);
+            navigationView.getMenu().findItem(R.id.nav_logout).setVisible(false);
+            userName.setText("Guest");
+            userLevel.setVisibility(View.GONE);
+            Glide.with(HomeActivity.this)
+                    .load(R.drawable.noimage)
+                    .transform(new CircleTransform())
+                    .apply(new RequestOptions()
+                            .placeholder(R.drawable.progress_animation)
+                            .error(R.drawable.noimage))
+                    .into(userImage);
+        }
 
     }
 
     public void setupNavDrawer(){
-        final DrawerLayout drawer = findViewById(R.id.drawer_layout);
-        NavigationView navigationView = findViewById(R.id.nav_view);
-        TextView userName = navigationView.getHeaderView(0).findViewById(R.id.user_name_txt);
-        TextView userLevel = navigationView.getHeaderView(0).findViewById(R.id.level_txt);
-        ImageView userImage = navigationView.getHeaderView(0).findViewById(R.id.profile_imageView);
+        drawer = findViewById(R.id.drawer_layout);
+        navigationView = findViewById(R.id.nav_view);
+        userName = navigationView.getHeaderView(0).findViewById(R.id.user_name_txt);
+        userLevel = navigationView.getHeaderView(0).findViewById(R.id.level_txt);
+        userImage = navigationView.getHeaderView(0).findViewById(R.id.profile_imageView);
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(R.id.nav_tournament,
@@ -80,32 +128,6 @@ public class HomeActivity extends AppCompatActivity {
         //to hide nav drawer items
         navigationView.getMenu().findItem(R.id.nav_latest_updates).setVisible(false);
 
-        if(isLoggedIn){
-            navigationView.getMenu().findItem(R.id.nav_login).setVisible(false);
-            navigationView.getMenu().findItem(R.id.nav_logout).setVisible(true);
-            userLevel.setVisibility(View.VISIBLE);
-            userLevel.setText(currentUser.getLevel());
-            userName.setText(currentUser.getUserName());
-            Glide.with(HomeActivity.this)
-                    .load(currentUser.getProfile())
-                    .transform(new CircleTransform())
-                    .apply(new RequestOptions()
-                            .placeholder(R.drawable.progress_animation)
-                            .error(R.drawable.noimage))
-                    .into(userImage);
-
-        }else{
-            userName.setText("Guest");
-            userLevel.setVisibility(View.GONE);
-            Glide.with(HomeActivity.this)
-                    .load(R.drawable.noimage)
-                    .transform(new CircleTransform())
-                    .apply(new RequestOptions()
-                            .placeholder(R.drawable.progress_animation)
-                            .error(R.drawable.noimage))
-                    .into(userImage);
-        }
-
         //Add additional click events which are not covered in nav graph such as log out or settings activity
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -116,11 +138,21 @@ public class HomeActivity extends AppCompatActivity {
                         Toast.makeText(getApplicationContext(), "Settings", Toast.LENGTH_SHORT).show();
                         break;
                     case R.id.nav_login:
-                        Toast.makeText(getApplicationContext(), "Log In", Toast.LENGTH_SHORT).show();
+                        Intent loginIntent = new Intent(HomeActivity.this, WebViewActivity.class);
+                        loginIntent.putExtra(Variables.WEBVIEW_URL_KEY,"https://akef.in/staging/function-test-2/");
+                        loginIntent.putExtra(Variables.WEBVIEW_JAVASCRIPT_KEY,Variables.JS_KEY_LOGIN);
+                        loginIntent.putExtra(Variables.REQUIRES_REFRESH,false);
+                        loginIntent.putExtra(Variables.WEBVIEW_TITLE,"Login");
+                        startActivity(loginIntent);
                         break;
 
                     case R.id.nav_logout:
-                        Toast.makeText(getApplicationContext(), "Log Out", Toast.LENGTH_SHORT).show();
+                        Intent logoutIntent = new Intent(HomeActivity.this, WebViewActivity.class);
+                        logoutIntent.putExtra(Variables.WEBVIEW_URL_KEY,"https://akef.in/staging/wp-login.php?action=logout&redirect_to=https://akef.in/staging/function-test-2/");
+                        logoutIntent.putExtra(Variables.WEBVIEW_JAVASCRIPT_KEY,Variables.JS_KEY);
+                        logoutIntent.putExtra(Variables.REQUIRES_REFRESH,false);
+                        logoutIntent.putExtra(Variables.WEBVIEW_TITLE,"Logout");
+                        startActivity(logoutIntent);
                         break;
                 }
                 //This is for maintaining the behavior of the Navigation view

@@ -53,12 +53,9 @@ public class TournamentGamesAdapter extends RecyclerView.Adapter<TournamentGames
             public void onClick(View view) {
                 Intent intent = new Intent(mContext, WebViewActivity.class);
                 intent.putExtra(Variables.WEBVIEW_URL_KEY,tournamentList.get(position).getLink());
-                intent.putExtra(Variables.WEBVIEW_JAVASCRIPT_KEY,"javascript:(function() { " +
-                        "var head = document.getElementsByClassName('ubermenu-responsive-toggle ubermenu-responsive-toggle-main ubermenu-skin-grey-white ubermenu-loc-header-menu ubermenu-responsive-toggle-content-align-left ubermenu-responsive-toggle-align-full ')[0].style.display='none'; " +
-                        "var head = document.getElementsByClassName('logo col-lg-4 col-md-4')[0].style.display='none'; " +
-                        "var head = document.getElementById('footer').style.display='none'; " +
-                        "})()");
+                intent.putExtra(Variables.WEBVIEW_JAVASCRIPT_KEY,Variables.JS_KEY);
                 intent.putExtra(Variables.REQUIRES_REFRESH,true);
+                intent.putExtra(Variables.WEBVIEW_TITLE,tournamentList.get(position).getTitle());
                 mContext.startActivity(intent);
             }
         });

@@ -22,6 +22,7 @@ import android.webkit.WebViewClient;
 import com.android.akef.Interfaces.WebAppInterface;
 import com.android.akef.R;
 import com.android.akef.UI.WebViewActivity;
+import com.android.akef.Utils.Variables;
 
 public class ForumFragment extends Fragment {
 
@@ -42,14 +43,9 @@ public class ForumFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         webView = view.findViewById(R.id.forum_view);
-        webView.addJavascriptInterface(new WebAppInterface(getActivity()), "Android");
-        String jsKey = "javascript:(function() { " +
-                "var head = document.getElementsByClassName('ubermenu-responsive-toggle ubermenu-responsive-toggle-main ubermenu-skin-grey-white ubermenu-loc-header-menu ubermenu-responsive-toggle-content-align-left ubermenu-responsive-toggle-align-full ')[0].style.display='none'; " +
-                "var head = document.getElementsByClassName('logo col-lg-4 col-md-4')[0].style.display='none'; " +
-                "var head = document.getElementById('footer').style.display='none'; " +
-                "})()";
-        String url = "https://akef.in/staging/function-test/";
-        loadWebView(url,jsKey,false);
+        webView.addJavascriptInterface(new WebAppInterface(getActivity(),false), "Android");
+        String url = "https://akef.in/staging/forums/";
+        loadWebView(url, Variables.JS_KEY,false);
 
     }
 
@@ -99,6 +95,7 @@ public class ForumFragment extends Fragment {
             }
         });
         webView.loadUrl(weburl);
+        webView.reload();
         if(requiresRefresh) {
             webView.reload();
         }

@@ -1,11 +1,15 @@
 package com.android.akef.UI;
 
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.webkit.GeolocationPermissions;
 import android.webkit.WebChromeClient;
+import android.webkit.WebResourceRequest;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -14,6 +18,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import com.android.akef.Interfaces.WebAppInterface;
 import com.android.akef.R;
 import com.android.akef.Utils.Variables;
 
@@ -38,10 +43,13 @@ public class WebViewActivity extends AppCompatActivity {
     public void loadWebView(final String weburl,String jsKey,boolean requiresRefresh){
         webView = findViewById(R.id.webview);
         webView.getSettings().setJavaScriptEnabled(true);
+        webView.addJavascriptInterface(new WebAppInterface(WebViewActivity.this,false), "Android");
         webView.getSettings().setUseWideViewPort(true);
         webView.getSettings().setLoadWithOverviewMode(true);
         webView.getSettings().setSupportZoom(true);
+        webView.getSettings().setUserAgentString("AKEF");
         webView.getSettings().setSupportMultipleWindows(true);
+        webView.getSettings().setJavaScriptCanOpenWindowsAutomatically(true);
         webView.setScrollBarStyle(View.SCROLLBARS_INSIDE_OVERLAY);
         webView.setWebChromeClient(new WebChromeClient(){
             @Override
@@ -79,6 +87,12 @@ public class WebViewActivity extends AppCompatActivity {
                 Log.e("WebviewActivity", "onPageFinished: " + jsKey );
                 webView.loadUrl(jsKey);
             }
+
+            @Override
+            public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
+                view.loadUrl(request.getUrl().toString());
+                return false;
+            }
         });
         webView.loadUrl(weburl);
         if(requiresRefresh) {
@@ -88,7 +102,29 @@ public class WebViewActivity extends AppCompatActivity {
 
     @Override
     public boolean onSupportNavigateUp() {
-        onBackPressed();
+        if (webView.canGoBack()) {
+            webView.goBack();
+        } else {
+            onBackPressed();
+        }
         return true;
     }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (event.getAction() == KeyEvent.ACTION_DOWN) {
+            switch (keyCode) {
+                case KeyEvent.KEYCODE_BACK:
+                    if (webView.canGoBack()) {
+                        webView.goBack();
+                    } else {
+                        finish();
+                    }
+                    return true;
+            }
+
+        }
+        return super.onKeyDown(keyCode, event);
+    }
+
 }

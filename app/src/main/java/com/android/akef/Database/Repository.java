@@ -47,4 +47,16 @@ public class Repository {
         }
         return userList.get(0);
     }
+
+    public void insertUser(User user,DatabaseFetchListener  listener) {
+        Executor myExecutor = Executors.newSingleThreadExecutor();
+        myExecutor.execute(() -> {
+            appDatabase.userDao().insert(user);
+            listener.onLoadingFinished(user);
+        });
+    }
+
+    public void deleteAllUsers() {
+        appDatabase.userDao().deleteAll();
+    }
 }
