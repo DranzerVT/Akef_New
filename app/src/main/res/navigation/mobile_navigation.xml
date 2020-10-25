@@ -30,7 +30,77 @@
         tools:layout="@layout/streamers_connect_fragment" />
 
     <fragment android:id="@+id/nav_forum"
-        android:name="com.android.akef.UI.forum.ForumFragment"
+        android:name="com.android.akef.UI.webview.WebviewFragment"
         android:label="@string/forums"
-        tools:layout="@layout/forum_fragment" />
+        tools:layout="@layout/webview_fragment" >
+        <argument
+            android:name="URL"
+            app:argType="string"
+            android:defaultValue="" />
+    </fragment>
+    <action
+        android:id="@+id/action_global_nav_forum"
+        app:destination="@id/nav_forum"
+        app:launchSingleTop="true" />
+
+    <fragment android:id="@+id/nav_profile"
+        android:name="com.android.akef.UI.webview.WebviewFragment"
+        android:label="@string/profile"
+        tools:layout="@layout/webview_fragment" >
+        <argument
+            android:name="URL"
+            app:argType="string"
+            android:defaultValue="" />
+    </fragment>
+
+    <action
+        android:id="@+id/action_global_nav_profile"
+        app:destination="@id/nav_profile"
+        app:launchSingleTop="true" />
+
+    <fragment android:id="@+id/nav_settings"
+        android:name="com.android.akef.UI.webview.WebviewFragment"
+        android:label="@string/settings"
+        tools:layout="@layout/webview_fragment" >
+        <argument
+            android:name="URL"
+            app:argType="string"
+            android:defaultValue="" />
+    </fragment>
+
+    <action
+        android:id="@+id/action_global_nav_settings"
+        app:destination="@id/nav_settings"
+        app:launchSingleTop="true" />
+
+    <fragment android:id="@+id/nav_mytournament"
+        android:name="com.android.akef.UI.webview.WebviewFragment"
+        android:label="@string/mytourney"
+        tools:layout="@layout/webview_fragment" >
+        <argument
+            android:name="URL"
+            app:argType="string"
+            android:defaultValue="" />
+    </fragment>
+
+    <action
+        android:id="@+id/action_global_nav_mytournament"
+        app:destination="@id/nav_mytournament"
+        app:launchSingleTop="true" />
+
+    <fragment android:id="@+id/nav_matches"
+        android:name="com.android.akef.UI.webview.WebviewFragment"
+        android:label="@string/my_matches"
+        tools:layout="@layout/webview_fragment" >
+        <argument
+            android:name="URL"
+            app:argType="string"
+            android:defaultValue="" />
+    </fragment>
+
+    <action
+        android:id="@+id/action_global_nav_matches"
+        app:destination="@id/nav_matches"
+        app:launchSingleTop="true" />
+
 </navigation>

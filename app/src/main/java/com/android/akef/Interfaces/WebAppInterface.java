@@ -20,6 +20,7 @@ public class WebAppInterface {
     public WebAppInterface(Context c,boolean finishAfterFuncCall) {
         mContext = c;
         repository = Repository.getInstance(((Activity)mContext).getApplication());
+        this.finishAfterFuncCall = finishAfterFuncCall;
     }
 
  /*   *//** Show a toast from the web page *//*
@@ -35,17 +36,26 @@ public class WebAppInterface {
     }
 
     @JavascriptInterface
-    public void onLoginSuccess(String Id,String userName,String profilePic,String profileLink) {
+    public void onLoginSuccess(String Id,String userName,String profilePic,String coverPic,String profileLink) {
         Log.e("WebAppInterface", "onLoginSuccess: " + userName );
-        Variables.setSuccessToast(mContext,"Login Successful!!");
         long userID = Long.parseLong(Id);
-        User user = new User(userID,userName,profilePic,"0",profileLink);
+        if(userID == 0){
+            repository.deleteAllUsers();
+            return;
+        }
+        User user = new User(userID,userName,profilePic,"0",profileLink,coverPic);
+        if (finishAfterFuncCall) {
+            Variables.setSuccessToast(mContext, "Login Successful!!");
+        }
         repository.insertUser(user, new DatabaseFetchListener() {
             @Override
             public <T> void onLoadingFinished(T o) {
 
-                ((Activity)mContext).finish();
+                if(finishAfterFuncCall) {
+                    ((Activity) mContext).finish();
+                }
             }
         });
+
     }
 }

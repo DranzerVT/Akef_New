@@ -1,4 +1,7 @@
-package com.android.akef.UI;
+package com.android.akef.UI.webview;
+
+import androidx.appcompat.app.AlertDialog;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
@@ -7,64 +10,75 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+
 import android.util.Log;
 import android.view.KeyEvent;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.webkit.GeolocationPermissions;
 import android.webkit.ValueCallback;
 import android.webkit.WebChromeClient;
 import android.webkit.WebResourceRequest;
-import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 
 import com.android.akef.Interfaces.WebAppInterface;
 import com.android.akef.R;
 import com.android.akef.Utils.Variables;
 
-public class WebViewActivity extends AppCompatActivity {
+public class WebviewFragment extends Fragment {
 
+    private WebViewModel mViewModel;
     WebView webView;
     public ValueCallback<Uri[]> uploadMessage;
     private ValueCallback<Uri> mUploadMessage;
     private ValueCallback<Uri[]> mUploadMessageForAndroid5;
-    boolean finishAfterFuncCall = false;
+
+    private String mCurrentPhotoPath;
+
+    public static WebviewFragment newInstance() {
+        return new WebviewFragment();
+    }
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_web_view);
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        String url = getIntent().getExtras().getString(Variables.WEBVIEW_URL_KEY,"");
-        String jsKey = getIntent().getExtras().getString(Variables.WEBVIEW_JAVASCRIPT_KEY,"");
-        String title = getIntent().getExtras().getString(Variables.WEBVIEW_TITLE,"AKEF");
-        boolean requiresRefresh = getIntent().getBooleanExtra(Variables.REQUIRES_REFRESH,false);
-        getSupportActionBar().setTitle(title);
-        loadWebView(url,jsKey,requiresRefresh);
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
+                             @Nullable Bundle savedInstanceState) {
+        return inflater.inflate(R.layout.webview_fragment, container, false);
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        webView = view.findViewById(R.id.webfragment_view);
+        String url = getArguments().getString("URL");
+        loadWebView(url, Variables.JS_KEY,false);
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        mViewModel = new ViewModelProvider(this).get(WebViewModel.class);
+        // TODO: Use the ViewModel
     }
 
     public void loadWebView(final String weburl,String jsKey,boolean requiresRefresh){
-        webView = findViewById(R.id.webview);
         webView.getSettings().setJavaScriptEnabled(true);
-        if(weburl.equals(Variables.LOGIN_URL) || weburl.equals(Variables.LOGOUT_URL)) {
-            webView.getSettings().setUserAgentString(Variables.WEBVIEW_USER_AGENT_CUSTOM);
-            webView.getSettings().setCacheMode(WebSettings.LOAD_NO_CACHE);
-            finishAfterFuncCall = true;
-        }
-        webView.addJavascriptInterface(new WebAppInterface(WebViewActivity.this,finishAfterFuncCall), "Android");
+        webView.addJavascriptInterface(new WebAppInterface(getActivity(),false), "Android");
         webView.getSettings().setUseWideViewPort(true);
         webView.getSettings().setLoadWithOverviewMode(true);
         webView.getSettings().setSupportZoom(true);
+        webView.getSettings().setSupportMultipleWindows(true);
         webView.getSettings().setDomStorageEnabled(true);
         webView.getSettings().setAllowContentAccess(true);
         webView.getSettings().setAllowFileAccess(true);
         webView.setScrollBarStyle(View.SCROLLBARS_INSIDE_OVERLAY);
         webView.setWebChromeClient(new MyWebChromeClient());
+
         webView.setWebViewClient(new WebViewClient() {
             @Override
             public void onPageFinished(WebView view, String url)
@@ -84,33 +98,25 @@ public class WebViewActivity extends AppCompatActivity {
         if(requiresRefresh) {
             webView.reload();
         }
-    }
 
-    @Override
-    public boolean onSupportNavigateUp() {
-        if (webView.canGoBack() && !webView.getUrl().equals(Variables.LOGIN_URL)) {
-            webView.goBack();
-        } else {
-            onBackPressed();
-        }
-        return true;
-    }
-
-    @Override
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if (event.getAction() == KeyEvent.ACTION_DOWN) {
-            switch (keyCode) {
-                case KeyEvent.KEYCODE_BACK:
-                    if (webView.canGoBack() && !webView.getUrl().equals(Variables.LOGIN_URL)) {
-                        webView.goBack();
-                    } else {
-                        finish();
+        webView.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View view, int keyCode, KeyEvent event) {
+                if (event.getAction() == KeyEvent.ACTION_DOWN) {
+                    switch (keyCode) {
+                        case KeyEvent.KEYCODE_BACK:
+                            if (webView.canGoBack()) {
+                                webView.goBack();
+                            } else {
+                               return false;
+                            }
+                            return true;
                     }
-                    return true;
-            }
 
-        }
-        return super.onKeyDown(keyCode, event);
+                }
+                return false;
+            }
+        });
     }
 
     class MyWebChromeClient extends WebChromeClient {
@@ -118,7 +124,7 @@ public class WebViewActivity extends AppCompatActivity {
         @Override
         public void onGeolocationPermissionsShowPrompt(final String origin, final GeolocationPermissions.Callback callback) {
             final boolean remember = false;
-            AlertDialog.Builder builder = new AlertDialog.Builder(WebViewActivity.this);
+            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
             builder.setTitle("Locations");
             builder.setMessage("Would like to use your Current Location ")
                     .setCancelable(true).setPositiveButton("Allow", new DialogInterface.OnClickListener() {
@@ -153,7 +159,6 @@ public class WebViewActivity extends AppCompatActivity {
             uploadMessage = filePathCallback;
             openFileChooserImplForAndroid5(uploadMessage);
             return true;
-
         }
 
         //For Android 4.1 only
@@ -191,7 +196,6 @@ public class WebViewActivity extends AppCompatActivity {
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent intent) {
-        super.onActivityResult(requestCode, resultCode, intent);
         Log.v("ForumFragment", "ForumFragment # onActivityResult # requestCode=" + requestCode + " # resultCode=" + resultCode);
         if (requestCode == Variables.FILECHOOSER_RESULTCODE) {
             if (null == mUploadMessage)

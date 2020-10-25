@@ -18,13 +18,16 @@ public class User {
     private String level;
     @ColumnInfo(name = "Link")
     private String link;
+    @ColumnInfo(name = "CoverPic")
+    private String coverPic;
 
-    public User(long userID, String userName, String profile, String level, String link) {
+    public User(long userID, String userName, String profile, String level, String link,String coverPic) {
         this.userID = userID;
         this.userName = userName;
         this.profile = profile;
         this.level = level;
         this.link = link;
+        this.coverPic = coverPic;
     }
 
     public long getUserID() {
@@ -65,5 +68,13 @@ public class User {
 
     public void setLink(String link) {
         this.link = link;
+    }
+
+    public String getCoverPic() {
+        return coverPic;
+    }
+
+    public void setCoverPic(String coverPic) {
+        this.coverPic = coverPic;
     }
 }

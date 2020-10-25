@@ -13,6 +13,23 @@
             android:id="@+id/nav_home"
             android:icon="@drawable/ic_baseline_home_24"
             android:title="@string/menu_home" />
+
+        <item
+            android:id="@+id/profile"
+            android:icon="@drawable/ic_baseline_person_24"
+            android:title="@string/profile" />
+
+        <item
+            android:id="@+id/mytournament"
+            android:icon="@drawable/ic_emoji_events_24px"
+            android:title="@string/mytourney" />
+
+        <item
+            android:id="@+id/matches"
+            android:icon="@drawable/ic_baseline_games_24"
+            android:title="@string/my_matches" />
+
+
         <item
             android:id="@+id/nav_latest_updates"
             android:icon="@drawable/ic_baseline_new_releases_24"
@@ -24,7 +41,7 @@
             android:title="@string/streamersconnect" />
 
         <item
-            android:id="@+id/nav_forum"
+            android:id="@+id/forum"
             android:icon="@drawable/ic_baseline_forum_24"
             android:title="@string/forums" />
     </group>
@@ -32,7 +49,7 @@
     <group android:checkableBehavior="none"
         android:id="@+id/menu_bot">
         <item
-            android:id="@+id/nav_settings"
+            android:id="@+id/settings"
             android:icon="@drawable/ic_baseline_settings_24"
             android:title="@string/settings" />
 
