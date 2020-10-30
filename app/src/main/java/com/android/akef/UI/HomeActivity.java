@@ -67,6 +67,7 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
+        repository = Repository.getInstance(getApplication());
         webView = new WebView(this);
         webView.setVisibility(View.GONE);
         webView.getSettings().setJavaScriptEnabled(true);
@@ -79,19 +80,19 @@ public class HomeActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        repository = Repository.getInstance(getApplication());
-        currentUser = repository.getLoggedInUser();
-        if(currentUser!=null && currentUser.getUserID() != 0){
-            isLoggedIn = true;
-        }else{
-            isLoggedIn = false;
-        }
 
         checkLoginState();
     }
 
     public void checkLoginState(){
 
+        currentUser = repository.getLoggedInUser();
+        if(currentUser!=null && currentUser.getUserID() != 0){
+            isLoggedIn = true;
+        }else{
+            isLoggedIn = false;
+        }
+        
         if(isLoggedIn){
             navigationView.getMenu().findItem(R.id.nav_login).setVisible(false);
             navigationView.getMenu().findItem(R.id.nav_logout).setVisible(true);
@@ -184,6 +185,7 @@ public class HomeActivity extends AppCompatActivity {
                 Bundle bundle;
                 if(menuItem.getItemId() != R.id.nav_login && menuItem.getItemId() != R.id.nav_logout){
                     webView.reload();
+                    checkLoginState();
                 }
                 switch (menuItem.getItemId()) {
                     case R.id.forum:

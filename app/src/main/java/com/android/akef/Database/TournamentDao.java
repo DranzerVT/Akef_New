@@ -27,4 +27,6 @@ public interface TournamentDao {
     @Query("SELECT * from Tournament order by TournamentID desc")
     List<Tournament> getAllTournaments();
 
+    @Query("SELECT * from Tournament order by TournamentID desc limit :count")
+    List<Tournament> getTournamentsByCount(int count);
 }

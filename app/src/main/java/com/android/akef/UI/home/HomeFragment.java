@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,22 +14,30 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.widget.NestedScrollView;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.android.akef.Adapters.TournamentGamesAdapter;
 import com.android.akef.Adapters.TrendingGamesAdapter;
+import com.android.akef.Interfaces.DatabaseFetchListener;
+import com.android.akef.Interfaces.TournamentListType;
 import com.android.akef.R;
+import com.android.akef.Tables.Tournament;
 import com.android.akef.UI.WebViewActivity;
+import com.android.akef.UI.tournaments.TournamentsViewModel;
 import com.android.akef.Utils.Variables;
+
+import java.util.List;
 
 public class HomeFragment extends Fragment {
 
     private HomeViewModel mViewModel;
     NestedScrollView mScrollView;
-    RecyclerView gameListView;
+    RecyclerView gameListView,tournamentListView;
     TrendingGamesAdapter trendingGamesAdapter;
-    Button btnAdminPanel, btnEsportsRegistration;
+    Button btnAdminPanel;
     private Context mContext;
 
     public static HomeFragment newInstance() {
@@ -44,12 +53,39 @@ public class HomeFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        mViewModel = new ViewModelProvider(this).get(HomeViewModel.class);
         mScrollView = view.findViewById(R.id.scrollView);
         gameListView = view.findViewById(R.id.trend_games_list);
         gameListView.setLayoutManager(new GridLayoutManager(mContext,
                 1, GridLayoutManager.HORIZONTAL,false));
+        tournamentListView = view.findViewById(R.id.recent_events_list);
+        tournamentListView.setLayoutManager(new GridLayoutManager(mContext,
+                1, GridLayoutManager.HORIZONTAL,false));
         btnAdminPanel = view.findViewById(R.id.btn_admin_panel);
-        btnEsportsRegistration = view.findViewById(R.id.esports_reg_btn);
+
+        List<Tournament> tournamentList = mViewModel.fetchTournamentsFromDB(4);
+        if(tournamentList!= null && tournamentList.size() > 0){
+            TournamentGamesAdapter tournamentGamesAdapter = new TournamentGamesAdapter(tournamentList,getActivity(), TournamentListType.HOME);
+            tournamentListView.setAdapter(tournamentGamesAdapter);
+        }
+        mViewModel.loadTournamentList(new DatabaseFetchListener() {
+            @Override
+            public <T> void onLoadingFinished(T o) {
+                if(o!=null){
+                    List<Tournament> tournamentList = mViewModel.fetchTournamentsFromDB(4);
+
+                    getActivity().runOnUiThread(new Runnable() {
+
+                        @Override
+                        public void run() {
+                            TournamentGamesAdapter tournamentGamesAdapter = new TournamentGamesAdapter(tournamentList,getActivity(),TournamentListType.HOME);
+                            tournamentListView.setAdapter(tournamentGamesAdapter);
+                        }
+                    });
+
+                }
+            }
+        });
 
         trendingGamesAdapter = new TrendingGamesAdapter(mContext);
         gameListView.setAdapter(trendingGamesAdapter);
@@ -63,20 +99,11 @@ public class HomeFragment extends Fragment {
             }
         });
 
-        btnEsportsRegistration.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(mContext, WebViewActivity.class);
-                intent.putExtra(Variables.WEBVIEW_URL_KEY,"https://www.akef.in/esports-organization-registration/");
-                startActivity(intent);
-            }
-        });
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mViewModel = ViewModelProviders.of(this).get(HomeViewModel.class);
     }
 
     @Override

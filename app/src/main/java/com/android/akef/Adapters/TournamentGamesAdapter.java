@@ -11,6 +11,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.android.akef.Interfaces.TournamentListType;
 import com.android.akef.R;
 import com.android.akef.Tables.Tournament;
 import com.android.akef.UI.WebViewActivity;
@@ -23,10 +24,12 @@ public class TournamentGamesAdapter extends RecyclerView.Adapter<TournamentGames
 
     List<Tournament> tournamentList;
     Context mContext;
+    int listType;
 
-    public TournamentGamesAdapter(List<Tournament> tournamentList,Context mContext) {
+    public TournamentGamesAdapter(List<Tournament> tournamentList,Context mContext,int listType) {
         this.tournamentList = tournamentList;
         this.mContext = mContext;
+        this.listType = listType;
     }
 
     @NonNull
@@ -34,8 +37,12 @@ public class TournamentGamesAdapter extends RecyclerView.Adapter<TournamentGames
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         //This is what adds the code we've written in here to our target view
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-
-        View view = inflater.inflate(R.layout.tournament_item_layout, parent, false);
+        View view = null;
+        if(listType == TournamentListType.TOURNAMENT) {
+            view = inflater.inflate(R.layout.tournament_item_layout, parent, false);
+        }else if(listType == TournamentListType.HOME){
+            view = inflater.inflate(R.layout.tournament_item_layout_home, parent, false);
+        }
 
         return new ViewHolder(view);
     }
@@ -46,6 +53,9 @@ public class TournamentGamesAdapter extends RecyclerView.Adapter<TournamentGames
         holder.title.setText(tournamentList.get(position).getTitle());
         holder.date.setText(tournamentList.get(position).getStartDate());
         holder.gameName.setText(tournamentList.get(position).getTournamentGame());
+        if(listType ==  TournamentListType.HOME){
+            holder.title.setSelected(true);
+        }
         holder.platform.setText(tournamentList.get(position).getTournamentPlatform());
         holder.maxParticipants.setText(tournamentList.get(position).getTournamentMaxParticipants());
         holder.tournamentCard.setOnClickListener(new View.OnClickListener() {

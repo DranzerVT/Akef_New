@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/tournament_card"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="200dp"
+    android:layout_height="wrap_content"
+    android:layout_margin="2dp"
+    app:cardCornerRadius="4dp"
+    app:cardElevation="4dp"
+    app:contentPaddingBottom="16dp"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_gravity="center"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/tournamentLogo"
+            android:layout_width="84dp"
+            android:layout_height="84dp"
+            android:src="@drawable/akef_logo"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="10dp"
+            app:layout_constraintTop_toBottomOf="@+id/tournamentTitle" />
+
+        <TextView
+            android:id="@+id/tournamentTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:ellipsize="marquee"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:marqueeRepeatLimit="marquee_forever"
+            android:scrollHorizontally="true"
+            android:singleLine="true"
+            android:textAlignment="center"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Valorant Meta League" />
+
+        <TextView
+            android:id="@+id/tournamentDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="20th Dec, 2020"
+            android:layout_marginTop="20dp"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tournamentLogo" />
+
+        <TextView
+            android:id="@+id/tournamentGameName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableStart="@drawable/ic_baseline_videogame_asset_24"
+            android:drawablePadding="4dp"
+            android:gravity="center"
+            android:text="Valorant"
+            android:layout_marginTop="10dp"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle2"
+            app:layout_constraintEnd_toEndOf="@+id/tournamentDate"
+            app:layout_constraintStart_toStartOf="@+id/tournamentDate"
+            app:layout_constraintTop_toBottomOf="@id/tournamentDate" />
+
+        <TextView
+            android:id="@+id/tournamentConsole"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:drawableStart="@drawable/ic_baseline_computer_24"
+            android:drawablePadding="4dp"
+            android:text="PC"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle2"
+            app:layout_constraintEnd_toEndOf="@+id/tournamentDate"
+            app:layout_constraintStart_toStartOf="@+id/tournamentDate"
+            app:layout_constraintTop_toBottomOf="@+id/tournamentGameName" />
+
+        <TextView
+            android:id="@+id/tournamentTeams"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:drawableStart="@drawable/ic_baseline_people_24"
+            android:drawablePadding="4dp"
+            android:gravity="center"
+            android:text="64/64"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle2"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/tournamentConsole"
+            app:layout_constraintStart_toStartOf="@+id/tournamentConsole"
+            app:layout_constraintTop_toBottomOf="@+id/tournamentConsole"
+            android:layout_marginBottom="10dp"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</com.google.android.material.card.MaterialCardView>

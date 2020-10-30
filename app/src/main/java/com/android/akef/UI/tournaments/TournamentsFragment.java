@@ -16,6 +16,7 @@ import android.view.ViewGroup;
 
 import com.android.akef.Adapters.TournamentGamesAdapter;
 import com.android.akef.Interfaces.DatabaseFetchListener;
+import com.android.akef.Interfaces.TournamentListType;
 import com.android.akef.R;
 import com.android.akef.Tables.Tournament;
 
@@ -43,7 +44,7 @@ public class TournamentsFragment extends Fragment {
         tournamentListView = view.findViewById(R.id.recyclerView);
         List<Tournament> tournamentList = mViewModel.fetchTournamentsFromDB();
         if(tournamentList!= null && tournamentList.size() > 0){
-            TournamentGamesAdapter tournamentGamesAdapter = new TournamentGamesAdapter(tournamentList,getActivity());
+            TournamentGamesAdapter tournamentGamesAdapter = new TournamentGamesAdapter(tournamentList,getActivity(), TournamentListType.TOURNAMENT);
             tournamentListView.setAdapter(tournamentGamesAdapter);
         }
         mViewModel.loadTournamentList(new DatabaseFetchListener() {
@@ -58,7 +59,7 @@ public class TournamentsFragment extends Fragment {
 
                         @Override
                         public void run() {
-                            TournamentGamesAdapter tournamentGamesAdapter = new TournamentGamesAdapter(tournamentList,getActivity());
+                            TournamentGamesAdapter tournamentGamesAdapter = new TournamentGamesAdapter(tournamentList,getActivity(),TournamentListType.TOURNAMENT);
                             tournamentListView.setAdapter(tournamentGamesAdapter);
                         }
                     });

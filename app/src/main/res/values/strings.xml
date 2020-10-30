@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">AKEF</string>
+    <string name="app_name">AKEF Play</string>
     <string name="title_activity_home">HomeActivity</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -15,25 +15,16 @@
     <string name="settings">Settings</string>
     <string name="log_in">Log In</string>
 
-    <string name="an_op_community_just_for_gamers">An <font color='#EE0000'>OP</font> community Just for gamers</string>
-    <string name="desc_main_text">A Federation that mainly aim at developing the eSports community in Kerala
-        by reaching out to the gaming community across the state, giving them additional exposure to the wide spectrum of games that are available.
-        \n\nAre you an organizer or a group that is interested in hosting gaming tournaments?
-        \n\nFeel free to reach out to us by clicking on the below button, we would love to work together with you.</string>
+    <string name="home_page_desc_title">THE FUTURE IS HERE</string>
+    <string name="desc_main_text">Are you ready to experience the future of eSports Community ?
+            Because we are. We from AKEF family welcomes you to experience the true meaning of community and to join us in this journey, to tomorrow. </string>
     <string name="codm_header">Looking for <font color='#EE0000'>CODM</font> Page?</string>
     <string name="codm_desc">Are you a COD Mobile player ? We have launched a new subsidiary for COD Mobile. Wanna know more about our new this?.</string>
     <string name="trending_games">TRENDING <font color='#EE0000'>GAMES</font></string>
-    <string name="what_akpga_have">WHAT AKPGA <font color='#EE0000'>HAVE</font></string>
-    <string name="stats_header">Lets look at some of our latest stats and achievements</string>
-    <string name="members">MEMBERS</string>
-    <string name="tournaments_hosted">TOURNAMENTS HOSTED</string>
-    <string name="daily_room_matches">DAILY ROOM MATCHES</string>
-    <string name="got_a_question">GOT A <font color='#EE0000'>QUESTION</font> ?</string>
-    <string name="your_name_required">Your Name (required)</string>
-    <string name="your_email_required">Your Email (required)</string>
-    <string name="your_phone_number_required">Your Phone Number (required)</string>
-    <string name="subject_required">Subject (required)</string>
-    <string name="your_message_required">Your Message (required)</string>
+    <string name="our_services">OUR <font color='#ffc400'>SERVICES</font></string>
+    <string name="our_partners">OUR <font color='#ffc400'>PARTNERS</font></string>
+    <string name="recent_events">RECENT <font color='#ffc400'>EVENTS</font></string>
+
     <string name="contact_desc">Feel free to reach out to us if you have some queries, we\'ll be happy to help.</string>
     <string name="share_portfolio">For business purposes share your portfolio with <b>mail@akef.in</b> </string>
     <string name="close" />
@@ -48,4 +39,16 @@
     <string name="profile">My Profile</string>
     <string name="mytourney">My Tournaments</string>
     <string name="my_matches">My Matches</string>
+    <string name="talent_management">TALENT MANAGEMENT</string>
+    <string name="talent_managment_desc">AKEF acts as a Talent Incubator and helps budding eSports stars as well as aspiring content creators in the field of gaming.</string>
+    <string name="streamers_paradise">STREAMERS PARADISE</string>
+    <string name="streamers_paradise_desc">We have a huge network of talented streamers and casters who are ready to get on any event and make it worth spending time to watch.</string>
+    <string name="event_management">EVENT MANAGEMENT</string>
+    <string name="event_management_desc">We organize community tournaments for gamers along with hosting online and offline events, LAN Parties, Game launches, Themed Parties and more.</string>
+    <string name="largest_gaming_community">LARGEST GAMING COMMUNITY</string>
+    <string name="gaming_community_desc">Community is the biggest gift that you can ask for if you are a gamer, AKEF have the biggest community of gamers playing a wide array of games</string>
+    <string name="streaming_npartner"><font color='#ffc400'>Streaming</font> \nPartner</string>
+    <string name="actiwear_npartner"><font color='#ffc400'>Actiwear</font> \nPartner</string>
+    <string name="store_npartner"><font color='#ffc400'>Store</font> \nPartner</string>
+
 </resources>

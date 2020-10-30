@@ -62,6 +62,9 @@ dependencies {
     implementation 'com.google.code.gson:gson:2.8.5'
     implementation 'com.squareup.retrofit2:converter-gson:2.1.0'
 
+    // font awesome
+    implementation 'info.androidhive:fontawesome:0.0.5'
+
     // optional - Test helpers
     testImplementation "androidx.room:room-testing:$room_version"
     testImplementation 'junit:junit:4.12'
