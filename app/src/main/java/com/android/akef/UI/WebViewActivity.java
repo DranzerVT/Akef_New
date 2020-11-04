@@ -17,6 +17,8 @@ import android.webkit.WebResourceRequest;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.Button;
+import android.widget.LinearLayout;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -33,6 +35,10 @@ public class WebViewActivity extends AppCompatActivity {
     private ValueCallback<Uri> mUploadMessage;
     private ValueCallback<Uri[]> mUploadMessageForAndroid5;
     boolean finishAfterFuncCall = false;
+    boolean promptLogin = false;
+    Button loginBtn;
+    LinearLayout loginPromptContainer;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,12 +46,36 @@ public class WebViewActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        loginBtn = findViewById(R.id.login_prompt_btn);
+        loginPromptContainer = findViewById(R.id.login_container);
         String url = getIntent().getExtras().getString(Variables.WEBVIEW_URL_KEY,"");
         String jsKey = getIntent().getExtras().getString(Variables.WEBVIEW_JAVASCRIPT_KEY,"");
         String title = getIntent().getExtras().getString(Variables.WEBVIEW_TITLE,"AKEF");
         boolean requiresRefresh = getIntent().getBooleanExtra(Variables.REQUIRES_REFRESH,false);
+        promptLogin = getIntent().getBooleanExtra(Variables.PROMPT_LOGIN,false);
         getSupportActionBar().setTitle(title);
         loadWebView(url,jsKey,requiresRefresh);
+
+        if(promptLogin){
+            if(!Variables.isUserLoggedIn(getApplication())){
+                loginPromptContainer.setVisibility(View.VISIBLE);
+            }else{
+                loginPromptContainer.setVisibility(View.GONE);
+            }
+        }
+        loginBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent loginIntent = new Intent(WebViewActivity.this, WebViewActivity.class);
+                loginIntent.putExtra(Variables.WEBVIEW_URL_KEY,Variables.LOGIN_URL);
+                loginIntent.putExtra(Variables.WEBVIEW_JAVASCRIPT_KEY,Variables.JS_KEY_LOGIN);
+                loginIntent.putExtra(Variables.REQUIRES_REFRESH,false);
+                loginIntent.putExtra(Variables.WEBVIEW_TITLE,"Login");
+                startActivity(loginIntent);
+                finish();
+            }
+        });
+
     }
 
     public void loadWebView(final String weburl,String jsKey,boolean requiresRefresh){
@@ -72,6 +102,9 @@ public class WebViewActivity extends AppCompatActivity {
                 Log.e("WebviewActivity", "onPageFinished: " + jsKey );
                // webView.loadUrl(jsKey);
                 webView.evaluateJavascript(jsKey,null);
+                if (promptLogin) {
+                    webView.evaluateJavascript(Variables.LOGIN_HIDE_JS, null);
+                }
             }
 
             @Override

@@ -50,5 +50,6 @@
     <string name="streaming_npartner"><font color='#ffc400'>Streaming</font> \nPartner</string>
     <string name="actiwear_npartner"><font color='#ffc400'>Actiwear</font> \nPartner</string>
     <string name="store_npartner"><font color='#ffc400'>Store</font> \nPartner</string>
+    <string name="login_prompt">Please Login To take part in this tournament</string>
 
 </resources>

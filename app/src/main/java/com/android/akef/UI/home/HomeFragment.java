@@ -25,9 +25,6 @@ import com.android.akef.Interfaces.DatabaseFetchListener;
 import com.android.akef.Interfaces.TournamentListType;
 import com.android.akef.R;
 import com.android.akef.Tables.Tournament;
-import com.android.akef.UI.WebViewActivity;
-import com.android.akef.UI.tournaments.TournamentsViewModel;
-import com.android.akef.Utils.Variables;
 
 import java.util.List;
 

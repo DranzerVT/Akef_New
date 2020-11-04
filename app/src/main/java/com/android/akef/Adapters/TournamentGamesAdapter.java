@@ -66,6 +66,7 @@ public class TournamentGamesAdapter extends RecyclerView.Adapter<TournamentGames
                 intent.putExtra(Variables.WEBVIEW_JAVASCRIPT_KEY,Variables.JS_KEY);
                 intent.putExtra(Variables.REQUIRES_REFRESH,true);
                 intent.putExtra(Variables.WEBVIEW_TITLE,tournamentList.get(position).getTitle());
+                intent.putExtra(Variables.PROMPT_LOGIN,true);
                 mContext.startActivity(intent);
             }
         });

@@ -2,8 +2,8 @@
 <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/tournament_card"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="200dp"
-    android:layout_height="wrap_content"
+    android:layout_width="250dp"
+    android:layout_height="300dp"
     android:layout_margin="2dp"
     app:cardCornerRadius="4dp"
     app:cardElevation="4dp"
@@ -13,6 +13,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_gravity="center"
+        android:padding="10dp"
         android:layout_height="wrap_content">
 
         <ImageView
