@@ -51,6 +51,11 @@ public class TournamentGamesAdapter extends RecyclerView.Adapter<TournamentGames
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
         holder.title.setText(tournamentList.get(position).getTitle());
+        if(tournamentList.get(position).getPremium() =="1"){
+            holder.type.setVisibility(View.VISIBLE);
+        }else{
+            holder.type.setVisibility(View.GONE);
+        }
         holder.date.setText(tournamentList.get(position).getStartDate());
         holder.gameName.setText(tournamentList.get(position).getTournamentGame());
         if(listType ==  TournamentListType.HOME){
@@ -79,7 +84,7 @@ public class TournamentGamesAdapter extends RecyclerView.Adapter<TournamentGames
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         public ImageView logo;
-        public TextView title,date,gameName,platform,maxParticipants;
+        public TextView title,date,gameName,platform,maxParticipants, type;
         public MaterialCardView tournamentCard;
 
 
@@ -90,6 +95,7 @@ public class TournamentGamesAdapter extends RecyclerView.Adapter<TournamentGames
 
             //Finds the views from our row.xml
             logo = (ImageView) itemView.findViewById(R.id.tournamentLogo);
+            type = (TextView) itemView.findViewById(R.id.tournamentType);
             title = (TextView) itemView.findViewById(R.id.tournamentTitle);
             date = (TextView) itemView.findViewById(R.id.tournamentDate);
             gameName = (TextView) itemView.findViewById(R.id.tournamentGameName);

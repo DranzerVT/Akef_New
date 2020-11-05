@@ -25,6 +25,20 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
+            android:id="@+id/tournamentType"
+            android:layout_width="wrap_content"
+            android:layout_height="21dp"
+            app:layout_constraintBottom_toTopOf="@+id/tournamentTitle"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/tournamentLogo"
+            android:text=" Premium"
+            android:drawableStart="@drawable/ic_money_bill_alt_regular"
+            android:textAlignment="center"
+            android:visibility="gone"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle2"
+            android:textColor="#ffc400"/>
+
+        <TextView
             android:id="@+id/tournamentTitle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"

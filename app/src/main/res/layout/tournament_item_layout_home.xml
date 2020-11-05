@@ -27,10 +27,25 @@
             app:layout_constraintTop_toBottomOf="@+id/tournamentTitle" />
 
         <TextView
+            android:id="@+id/tournamentType"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableStart="@drawable/ic_money_bill_alt_regular"
+            android:text=" Premium"
+            android:textAlignment="center"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle2"
+            android:textColor="#ffc400"
+            android:visibility="gone"
+            app:layout_constraintBottom_toTopOf="@+id/tournamentTitle"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
             android:id="@+id/tournamentTitle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="24dp"
             android:ellipsize="marquee"
             android:focusable="true"
             android:focusableInTouchMode="true"
@@ -48,8 +63,8 @@
             android:id="@+id/tournamentDate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
             android:text="20th Dec, 2020"
-            android:layout_marginTop="20dp"
             android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle2"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -87,6 +102,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
+            android:layout_marginBottom="10dp"
             android:drawableStart="@drawable/ic_baseline_people_24"
             android:drawablePadding="4dp"
             android:gravity="center"
@@ -96,7 +112,7 @@
             app:layout_constraintEnd_toEndOf="@+id/tournamentConsole"
             app:layout_constraintStart_toStartOf="@+id/tournamentConsole"
             app:layout_constraintTop_toBottomOf="@+id/tournamentConsole"
-            android:layout_marginBottom="10dp"/>
+            app:layout_constraintVertical_bias="0.0" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
