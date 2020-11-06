@@ -51,7 +51,7 @@ public class TournamentGamesAdapter extends RecyclerView.Adapter<TournamentGames
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
         holder.title.setText(tournamentList.get(position).getTitle());
-        if(tournamentList.get(position).getPremium() =="1"){
+        if(tournamentList.get(position).getPremium().equals("1")){
             holder.type.setVisibility(View.VISIBLE);
         }else{
             holder.type.setVisibility(View.GONE);
