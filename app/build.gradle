@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+apply plugin: 'com.google.gms.google-services'
 
 android {
     compileSdkVersion 30
@@ -42,6 +43,7 @@ dependencies {
     implementation 'androidx.cardview:cardview:1.0.0'
     implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.2.0'
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0'
+    implementation 'com.karumi:dexter:6.2.1'
 
     //Custom toast
     implementation 'com.valdesekamdem.library:md-toast:0.9.0'
@@ -64,6 +66,20 @@ dependencies {
 
     // font awesome
     implementation 'info.androidhive:fontawesome:0.0.5'
+
+    //video compressor lib
+    implementation 'com.github.AbedElazizShe:LightCompressor:0.7.6'
+
+    // Import the BoM for the Firebase platform
+    implementation platform('com.google.firebase:firebase-bom:26.0.0')
+    implementation 'com.google.firebase:firebase-analytics'
+
+    // Declare the dependency for the Cloud Storage library
+    // When using the BoM, you don't specify versions in Firebase library dependencies
+    implementation 'com.google.firebase:firebase-storage'
+    // Declare the dependency for the Cloud Firestore library
+    // When using the BoM, you don't specify versions in Firebase library dependencies
+    implementation 'com.google.firebase:firebase-firestore'
 
     // optional - Test helpers
     testImplementation "androidx.room:room-testing:$room_version"

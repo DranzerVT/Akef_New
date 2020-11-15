@@ -51,5 +51,11 @@
     <string name="actiwear_npartner"><font color='#ffc400'>Actiwear</font> \nPartner</string>
     <string name="store_npartner"><font color='#ffc400'>Store</font> \nPartner</string>
     <string name="login_prompt">Please Login To take part in this tournament</string>
+    <string name="upload_desc">Please select a video clip to upload. \nMaximum video length allowed is 1 minute</string>
+    <string name="game_reels">Game Reels</string>
+    <string name="add_title">Add Title</string>
+    <string name="title">Title</string>
+    <string name="description">Description</string>
+    <string name="upload">Upload</string>
 
 </resources>

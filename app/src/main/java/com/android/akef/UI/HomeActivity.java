@@ -1,8 +1,12 @@
 package com.android.akef.UI;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Menu;
@@ -26,9 +30,15 @@ import com.bumptech.glide.request.transition.Transition;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
+import com.karumi.dexter.Dexter;
+import com.karumi.dexter.MultiplePermissionsReport;
+import com.karumi.dexter.PermissionToken;
+import com.karumi.dexter.listener.PermissionRequest;
+import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.app.ActivityCompat;
 import androidx.core.view.GravityCompat;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -37,6 +47,8 @@ import androidx.navigation.ui.NavigationUI;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+
+import java.util.List;
 
 public class HomeActivity extends AppCompatActivity {
 
@@ -51,6 +63,7 @@ public class HomeActivity extends AppCompatActivity {
     ImageView userImage;
     LinearLayout coverPic;
     WebView webView;
+    FloatingActionButton fabVideo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,12 +71,14 @@ public class HomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_home);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
+        fabVideo = findViewById(R.id.fab);
+        fabVideo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                if(isStoragePermissionGranted()){
+                    Intent intent = new Intent(HomeActivity.this,ReelUploadActivity.class);
+                    startActivity(intent);
+                }
             }
         });
 
@@ -101,6 +116,7 @@ public class HomeActivity extends AppCompatActivity {
             navigationView.getMenu().findItem(R.id.mytournament).setVisible(true);
             navigationView.getMenu().findItem(R.id.matches).setVisible(true);
             userLevel.setVisibility(View.GONE);
+            fabVideo.setVisibility(View.VISIBLE);
             userLevel.setText(currentUser.getLevel());
             userName.setText(currentUser.getUserName());
             Glide.with(HomeActivity.this)
@@ -133,6 +149,7 @@ public class HomeActivity extends AppCompatActivity {
             navigationView.getMenu().findItem(R.id.matches).setVisible(false);
             userName.setText("Guest");
             userLevel.setVisibility(View.GONE);
+            fabVideo.setVisibility(View.GONE);
             Glide.with(HomeActivity.this)
                     .load(R.drawable.noimage)
                     .transform(new CircleTransform())
@@ -175,8 +192,9 @@ public class HomeActivity extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
 
-        //to hide nav drawer items
+        //hide nav items that are currently not supported
         navigationView.getMenu().findItem(R.id.nav_latest_updates).setVisible(false);
+        navigationView.getMenu().findItem(R.id.nav_streamers_connect).setVisible(false);
 
         //Add additional click events which are not covered in nav graph such as log out or settings activity
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
@@ -213,6 +231,10 @@ public class HomeActivity extends AppCompatActivity {
                         bundle.putString("URL", Variables.SETTINGS_URL);
                         navController.navigate(R.id.action_global_nav_settings,bundle);
                         break;
+                    case R.id.nav_game_reels:
+                        Intent reelIntent = new Intent(HomeActivity.this,GameReelsActivity.class);
+                        startActivity(reelIntent);
+                        break;
                     case R.id.nav_login:
                         Intent loginIntent = new Intent(HomeActivity.this, WebViewActivity.class);
                         loginIntent.putExtra(Variables.WEBVIEW_URL_KEY,Variables.LOGIN_URL);
@@ -221,7 +243,6 @@ public class HomeActivity extends AppCompatActivity {
                         loginIntent.putExtra(Variables.WEBVIEW_TITLE,"Login");
                         startActivity(loginIntent);
                         break;
-
                     case R.id.nav_logout:
                         Intent logoutIntent = new Intent(HomeActivity.this, WebViewActivity.class);
                         logoutIntent.putExtra(Variables.WEBVIEW_URL_KEY,Variables.LOGOUT_URL);
@@ -253,6 +274,35 @@ public class HomeActivity extends AppCompatActivity {
         return NavigationUI.navigateUp(navController, mAppBarConfiguration)
                 || super.onSupportNavigateUp();
     }
+
+    public boolean isStoragePermissionGranted() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (checkSelfPermission(android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                    == PackageManager.PERMISSION_GRANTED && checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE)
+                    == PackageManager.PERMISSION_GRANTED) {
+                Log.v("HomeActivity", "Permission is granted");
+                return true;
+            } else {
+                Dexter.withContext(this)
+                        .withPermissions(
+                                Manifest.permission.READ_EXTERNAL_STORAGE,
+                                Manifest.permission.WRITE_EXTERNAL_STORAGE
+                        ).withListener(new MultiplePermissionsListener() {
+                    @Override public void onPermissionsChecked(MultiplePermissionsReport report) {
+                        if(report.areAllPermissionsGranted()){
+                            Log.v("HomeActivity", "Permission is granted");
+                        }
+                    }
+                    @Override public void onPermissionRationaleShouldBeShown(List<PermissionRequest> permissions, PermissionToken token) {/* ... */}
+                }).check();
+                return false;
+            }
+        } else { //permission is automatically granted on sdk<23 upon installation
+            Log.v("HomeActivity", "Permission is granted");
+            return true;
+        }
+    }
+
 
 
 }

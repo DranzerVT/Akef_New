@@ -12,4 +12,5 @@
     <color name="gray_text">#B1B1B1</color>
 
     <color name="editText_bg">#302F2F</color>
+    <color name="transparant">#00ffffff</color>
 </resources>

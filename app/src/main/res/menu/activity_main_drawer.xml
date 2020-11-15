@@ -41,6 +41,11 @@
             android:title="@string/streamersconnect" />
 
         <item
+            android:id="@+id/nav_game_reels"
+            android:icon="@drawable/ic_baseline_videocam_24"
+            android:title="@string/game_reels" />
+
+        <item
             android:id="@+id/forum"
             android:icon="@drawable/ic_baseline_forum_24"
             android:title="@string/forums" />

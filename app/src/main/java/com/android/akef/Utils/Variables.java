@@ -1,13 +1,18 @@
 package com.android.akef.Utils;
 
 import android.app.Application;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.util.Log;
 
 import com.android.akef.Database.Repository;
+import com.android.akef.R;
 import com.android.akef.Tables.User;
 import com.google.gson.Gson;
 import com.valdesekamdem.library.mdtoast.MDToast;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 //class to store static variables
 public class Variables {
@@ -18,6 +23,8 @@ public class Variables {
     public static final String REQUIRES_REFRESH = "RequiresRefresh" ;
     public static final String PROMPT_LOGIN = "PromptLogin";
     public static final String WEBVIEW_TITLE = "WebViewTitle" ;
+    public static final long MAX_VIDEO_DURATION = 1 ; //in minutes
+    public static final String COLLECTION_REEL = "game_reels";
 
     //URLS
     public static final String DOMAIN_URL = "https://staging.akef.in";
@@ -40,7 +47,6 @@ public class Variables {
             "var head = document.getElementsByClassName('logoutItem')[0].style.display='none'; " +
             "var head = document.getElementsByClassName('logoutItem')[1].style.display='none'; " +
             "})();";
-
 
     public static String LOGIN_HIDE_JS ="javascript:(function() { " +
             "var head = document.getElementsByClassName('login-btn button-small jtournamentb')[0].style.display='none'; " +
@@ -94,5 +100,13 @@ public class Variables {
         Repository repository = Repository.getInstance(applicationContext);
         User currentUser = repository.getLoggedInUser();
         return currentUser != null && currentUser.getUserID() != 0;
+    }
+
+    public static String getDateTimeStamp(){
+        String pattern = "yyyyMMddHHmmss";
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+
+        String date = simpleDateFormat.format(new Date());
+        return date;
     }
 }

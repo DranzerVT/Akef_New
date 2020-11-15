@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "728200519361",
+    "firebase_url": "https://akef-play.firebaseio.com",
+    "project_id": "akef-play",
+    "storage_bucket": "akef-play.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:728200519361:android:4b6203b1731e54d4a87e40",
+        "android_client_info": {
+          "package_name": "com.android.akef"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "728200519361-at4dm5sid1hngf317ma2p325lmqhl696.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCJ0VGyw8505z8fcIbDpDMcSkn9kWwn7II"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "728200519361-at4dm5sid1hngf317ma2p325lmqhl696.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -38,7 +38,7 @@ public class TrendingGamesAdapter extends RecyclerView.Adapter<TrendingGamesAdap
 
     @NonNull
     @Override
-    public TrendingGamesAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         //This is what adds the code we've written in here to our target view
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
 
@@ -49,13 +49,10 @@ public class TrendingGamesAdapter extends RecyclerView.Adapter<TrendingGamesAdap
 
     @Override
     public void onBindViewHolder(@NonNull TrendingGamesAdapter.ViewHolder holder, int position) {
-
-
         //Here we use the information in the list we created to define the views
         Drawable gameIcon = mGamesList.get(position);
         ImageView imageView = holder.img;
         imageView.setImageDrawable(gameIcon);
-
     }
 
     @Override

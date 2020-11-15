@@ -23,4 +23,25 @@
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
+    <style name="AppTheme.Dark.Dialog.ProgressTransparent" parent="Theme.AppCompat.Dialog">
+        <item name="android:alertDialogStyle">@style/CustomAlertDialogStyleTransparent</item>
+        <item name="colorAccent">@android:color/white</item>
+        <item name="android:textColorPrimary">@android:color/white</item>
+        <item name="android:windowAnimationStyle">@android:style/Animation.Dialog</item>
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+    </style>
+
+    <style name="CustomAlertDialogStyleTransparent">
+        <item name="android:bottomBright">@color/transparant</item>
+        <item name="android:bottomDark">@color/transparant</item>
+        <item name="android:bottomMedium">@color/transparant</item>
+        <item name="android:centerBright">@color/transparant</item>
+        <item name="android:centerDark">@color/transparant</item>
+        <item name="android:centerMedium">@color/transparant</item>
+        <item name="android:fullBright">@color/transparant</item>
+        <item name="android:fullDark">@color/transparant</item>
+        <item name="android:topBright">@color/transparant</item>
+        <item name="android:topDark">@color/transparant</item>
+    </style>
 </resources>
